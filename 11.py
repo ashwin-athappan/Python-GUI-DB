@@ -2,9 +2,6 @@ from tkinter import *
 import mysql.connector
 
 root=Tk()
-root.geometry('410x450')
-root.title("DATABASE USING MYSQL AND TKINTER")
-root.config(background="greenyellow")
 
 def Database():
     global connection, cursor
@@ -34,18 +31,18 @@ def show():
     for row in cursor.fetchall():
         print(row)
         
-lab=Label(root,text="Name")
-lab.place(x=0,y=0)
+lab=Label(root,text="Name :")
+lab.pack()
 entname=Entry(root,width=20,textvar=textin)
-entname.place(x=80,y=0)
-labl=Label(root,text="usn")
-labl.place(x=0,y=40)
+entname.pack()
+labl=Label(root,text="usn :")
+labl.pack()
 entusn=Entry(root,width=20,textvar=textinn)
-entusn.place(x=80,y=40)
-but=Button(root,padx=2,pady=2,text="Submit",command=insert)
-but.place(x=60,y=100)
-res=Button(root,padx=2,pady=2,text="Show",command=show)
-res.place(x=160,y=100)
+entusn.pack()
+but=Button(root,text="Submit",command=insert)
+but.pack()
+res=Button(root,text="Show",command=show)
+res.pack()
 
 #UPDATE
 name=StringVar()
@@ -55,15 +52,15 @@ def updateusn():
     cursor.execute("UPDATE people SET name = %s WHERE usn = %s",(str(name.get()),str(usn.get())))
     connection.commit()
 labuname=Label(root, text="Update Name:")
-labuname.place(x=0,y=200)
+labuname.pack()
 enttupdatename=Entry(root,width=20,textvar=name)
-enttupdatename.place(x=160,y=200)
+enttupdatename.pack()
 labusn=Label(root,text="Provide usn Number:")
-labusn.place(x=0,y=240)
+labusn.pack()
 entupdateusn=Entry(root,width=20,textvar=usn)
-entupdateusn.place(x=210,y=240)
-buttupdate=Button(root, padx=2, pady=2, text="Update",command=updateusn)
-buttupdate.place(x=80,y=280)
+entupdateusn.pack()
+buttupdate=Button(root, text="Update",command=updateusn)
+buttupdate.pack()
 
 #DELETE
 del1=StringVar()
@@ -73,19 +70,19 @@ def det():
     cursor.execute("DELETE FROM `people` WHERE name = %s",(dee,))
     connection.commit()
 labdelete=Label(root,text="Delete")
-labdelete.place(x=0,y=340)
+labdelete.pack()
 endelete=Entry(root,width=20,textvar=del1)
-endelete.place(x=90,y=340)
-butdel=Button(root,padx=2,pady=2,text="Delete",command=det)
-butdel.place(x=90,y=380)
+endelete.pack()
+butdel=Button(root,text="Delete",command=det)
+butdel.pack()
 
 #DROP TABLE
 def drop():
     Database()
     cursor.execute("DROP table people")
     connection.commit()
-buttdrop=Button(root, padx=2, pady=2, text="Drop Table",command=drop)
-buttdrop.place(x=180,y=380)
+buttdrop=Button(root, text="Drop Table",command=drop)
+buttdrop.pack()
 
 
 root.mainloop()
